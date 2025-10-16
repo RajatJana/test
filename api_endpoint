@@ -1,0 +1,54 @@
+import yaml
+
+# New endpoint for YAML to JSON conversion
+@router.post("/convert-yaml-to-requirements-json")
+async def convert_yaml_to_json(file: UploadFile = File(...)):
+    """
+    Upload a YAML file and convert it to JSON format.
+    Expects YAML with 'Functional_Requirements' structure and returns JSON with specified fields.
+    """
+    # Validate file type
+    if not file.filename.endswith(('.yaml', '.yml', '.YAML')):
+        raise HTTPException(status_code=400, detail="Only .yaml or .yml files are supported")
+
+    # Create temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.yaml') as temp_file:
+        # Save uploaded content to temp file
+        content = await file.read()
+        temp_file.write(content)
+        temp_path = temp_file.name
+
+    try:
+        # Read and parse YAML content
+        with open(temp_path, 'r') as f:
+            yaml_content = f.read()
+        
+        data = yaml.safe_load(yaml_content)
+        if not data or 'Functional_Requirements' not in data:
+            raise HTTPException(status_code=400, detail="Invalid YAML structure: Missing 'Functional_Requirements'")
+
+        # Initialize the output list for JSON
+        output = []
+
+        # Process each requirement in Functional_Requirements
+        for req in data.get('Functional_Requirements', []):
+            requirement = {
+                "requirement_id": req.get('requirement_id', ''),
+                "requirement_text": req.get('requirement_text', ''),
+                "original_text": req.get('original_text', ''),
+                "line_number": req.get('line_number', None),
+                "page_number": req.get('page_number', None),
+                "source_section": req.get('source_section_name', '')
+            }
+            output.append(requirement)
+
+        return {"converted_requirements": output}
+
+    except yaml.YAMLError as e:
+        raise HTTPException(status_code=400, detail=f"Error parsing YAML: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    finally:
+        # Clean up temporary file
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
