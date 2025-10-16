@@ -1,0 +1,475 @@
+Functional_Requirements:
+- requirement_id: FR001
+  title: Display Role-Based Submenus
+  requirement_text: System shall display submenus on the Main Screen that are specific to the user's assigned role(s).
+  original_text: It shows role based Submenus (as maintained by the system Administrator for all the roles/departments).
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 3
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  - Administrator has configured submenus for the user's role.
+  flow_of_events: []
+  post_conditions:
+  - User sees submenus specific to their assigned role(s).
+  fields: []
+  validations: []
+- requirement_id: FR002
+  title: Display Role-Based Announcements
+  requirement_text: System shall display announcements on the Main Screen that are specific to the user's assigned role(s).
+  original_text: Here User can see role based Announcements.
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 4
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  - Announcements are available for the user's role(s).
+  flow_of_events: []
+  post_conditions:
+  - User sees announcements specific to their assigned role(s).
+  fields: []
+  validations: []
+- requirement_id: FR003
+  title: Display Welcome Message
+  requirement_text: System shall display a welcome message at the middle of the Main Screen.
+  original_text: It shows welcome message at the middle of the Main Screen.
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 5
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  flow_of_events: []
+  post_conditions:
+  - A welcome message is displayed centrally on the screen.
+  fields:
+  - field_name: Welcome User name
+    type: view only
+    required: false
+    auto_populated: true
+  validations: []
+- requirement_id: FR004
+  title: Display Announcement Heading
+  requirement_text: System shall display an Announcement Heading in the first section of the Announcement Section.
+  original_text: In Announcement Section, First section shows Announcement Heading
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 6
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  - Announcements are available.
+  flow_of_events: []
+  post_conditions:
+  - Announcement Heading is displayed.
+  fields:
+  - field_name: Announcement Heading
+    type: view only
+    required: false
+    auto_populated: true
+  validations: []
+- requirement_id: FR005
+  title: Display Main Announcements
+  requirement_text: System shall display all announcements for roles assigned to the User in the second main section of the Announcement Section.
+  original_text: Second Main Section where all the Announcements for role(s) assigned to the User are shown
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 6
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  - Announcements are available for the user's role(s).
+  flow_of_events: []
+  post_conditions:
+  - All relevant announcements are displayed in the second section.
+  fields:
+  - field_name: Announcement Main Section
+    type: view only
+    required: false
+    auto_populated: true
+  validations: []
+- requirement_id: FR006
+  title: Display Archived Announcements
+  requirement_text: System shall display the archives of the last 5 expired announcements in the third section of the Announcement Section.
+  original_text: third section shows the Archives of last 5 expired Announcement.
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 7
+  pre_conditions:
+  - User has navigated to the Main Menu Screen.
+  - Expired announcements exist.
+  flow_of_events: []
+  post_conditions:
+  - The last 5 expired announcements for the assigned role are displayed in the third section.
+  fields:
+  - field_name: Announcement Archive section
+    type: view only
+    required: false
+    auto_populated: true
+  validations: []
+- requirement_id: FR007
+  title: Display Announcement History Columns
+  requirement_text: System shall display Announcement history with columns for To Date, From Date, Announcement Date, and Announcement Message.
+  original_text: Announcement history has following columns To Date, From Date, Announcement Date, and Announcement Message.
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 8
+  pre_conditions:
+  - User is viewing the Announcement history section.
+  flow_of_events: []
+  post_conditions:
+  - Announcement history table includes the specified columns.
+  fields:
+  - field_name: To Date
+    type: Date
+    required: false
+    auto_populated: true
+  - field_name: From Date
+    type: Date
+    required: false
+    auto_populated: true
+  - field_name: Announcement Date
+    type: Date
+    required: false
+    auto_populated: true
+  - field_name: Announcement Message
+    type: Text
+    required: false
+    auto_populated: true
+  validations: []
+- requirement_id: FR008
+  title: Show Full Announcement on Hover
+  requirement_text: System shall display the full announcement message on mouse hover if the announcement is long.
+  original_text: If announcement is long, then on mouse hover only, it shows the full message
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 9
+  pre_conditions:
+  - An announcement is displayed as a partial message.
+  - User hovers mouse over the announcement.
+  flow_of_events:
+  - step: User hovers mouse over an announcement.
+    outcome: System displays the full message.
+  post_conditions:
+  - Full announcement message is visible.
+  fields: []
+  validations: []
+- requirement_id: FR009
+  title: Show Partial Announcement
+  requirement_text: System shall display a partial announcement message followed by dots if the announcement is long and not hovered over.
+  original_text: otherwise part message appears followed by dots.
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Description (Main Menu screen)
+  source_section: '3.5'
+  source_sub_section: 3.5.1
+  page_number: 3
+  line_number: 9
+  pre_conditions:
+  - An announcement is long.
+  - User is not hovering mouse over the announcement.
+  flow_of_events: []
+  post_conditions:
+  - Partial message with ellipses is displayed.
+  fields: []
+  validations: []
+- requirement_id: FR010
+  title: Administrator Add Submenus
+  requirement_text: System Administrator shall be able to add new submenus.
+  original_text: New Submenus can be added by Administrator.
+  actor: Administrator
+  source_section_name: View Main Menu
+  source_sub_section_name: Flow of Events (Basic)
+  source_section: '3.5'
+  source_sub_section: 3.5.5
+  page_number: 3
+  line_number: 15
+  pre_conditions:
+  - Administrator is logged in and has appropriate permissions.
+  flow_of_events: []
+  post_conditions:
+  - New submenu is added to the system and is configurable for roles.
+  fields: []
+  validations: []
+- requirement_id: FR011
+  title: Navigate to Customer Search Screen
+  requirement_text: System shall navigate the User to the Customer Search Screen when the 'Customer search' Sub menu is clicked.
+  original_text: 'User clicks on Customer search Sub menu: Takes user to the Customer Search Screen.'
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Flow of Events (Basic)
+  source_section: '3.5'
+  source_sub_section: 3.5.5
+  page_number: 3
+  line_number: 16
+  pre_conditions:
+  - User is on the Main Menu Screen.
+  - Customer search Sub menu is visible to the User.
+  flow_of_events:
+  - step: User clicks on Customer search Sub menu.
+    outcome: System navigates to the Customer Search Screen.
+  post_conditions:
+  - User is viewing the Customer Search Screen.
+  fields: []
+  validations: []
+- requirement_id: FR012
+  title: Navigate to Log a Contact/Lead Page
+  requirement_text: System shall navigate the User to the ATLAS log a lead page when the 'Log a Contact link/ Lead' Sub menu is clicked.
+  original_text: 'User clicks on Log a Contact link/ Lead Sub menu: It will be given by IPRU.'
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Flow of Events (Basic)
+  source_section: '3.5'
+  source_sub_section: 3.5.5
+  page_number: 3
+  line_number: 17
+  pre_conditions:
+  - User is on the Main Menu Screen.
+  - Log a Contact link/ Lead Sub menu is visible to the User.
+  flow_of_events:
+  - step: User clicks on Log a Contact link/ Lead Sub menu.
+    outcome: System navigates to the ATLAS log a lead page.
+  post_conditions:
+  - User is viewing the ATLAS log a lead page.
+  fields: []
+  validations: []
+- requirement_id: FR013
+  title: Navigate to Department Queue Screen
+  requirement_text: System shall navigate the User to the Queues Screen when the 'Dept queue' Sub menu is clicked.
+  original_text: 'User clicks on Dept queue Sub menu: Takes user to the Queues Screen.'
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Flow of Events (Basic)
+  source_section: '3.5'
+  source_sub_section: 3.5.5
+  page_number: 3
+  line_number: 18
+  pre_conditions:
+  - User is on the Main Menu Screen.
+  - Dept queue Sub menu is visible to the User.
+  flow_of_events:
+  - step: User clicks on Dept queue Sub menu.
+    outcome: System navigates to the Queues Screen.
+  post_conditions:
+  - User is viewing the Queues Screen.
+  fields: []
+  validations: []
+- requirement_id: FR014
+  title: Navigate to Individual Queue Screen
+  requirement_text: System shall navigate the User to the Queues Screen when the 'Individual queue' Sub menu is clicked.
+  original_text: 'User clicks on Individual queue Sub menu: Takes User to the Queues Screen.'
+  actor:
+  - Call Centre
+  - CARE
+  - SHARE
+  - CSU
+  - COPS Service
+  - COPS Fin Recon
+  - CDOPS
+  - Central Underwriting Services
+  - Branch DOPS
+  - Branch underwriting team
+  - Claim Servicing Team
+  - Finance
+  - CPA
+  source_section_name: View Main Menu
+  source_sub_section_name: Flow of Events (Basic)
+  source_section: '3.5'
+  source_sub_section: 3.5.5
+  page_number: 3
+  line_number: 19
+  pre_conditions:
+  - User is on the Main Menu Screen.
+  - Individual queue Sub menu is visible to the User.
+  flow_of_events:
+  - step: User clicks on Individual queue Sub menu.
+    outcome: System navigates to the Queues Screen.
+  post_conditions:
+  - User is viewing the Queues Screen.
+  fields: []
+  validations: []
