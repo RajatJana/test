@@ -1,0 +1,120 @@
+Speaker 1: So, I was sitting at my kitchen table this morning doing the usual first of the month ritual, you know, paying rent.
+Speaker 2: Oh, yeah. Fun times, right?
+Speaker 1: It's so mundane. You open an app, type a number, hit a button, and boom, this huge chunk of your salary just vanishes into the ether. It took maybe 15 seconds, but for the first time, I actually like paused and looked at that little spinning wheel
+Speaker 2: and you started thinking.
+Speaker 1: I did. I thought we trust these apps with literally everything. Our life savings, our ident identity, our entire financial future. But I have absolutely zero clue how the machinery actually works. Like what is physically happening behind the glass when I tap transfer?
+Speaker 2: That is the modern condition, isn't it? We live in a world of black boxes.
+Speaker 1: The boxes, we see the sleek interface, the nice colors, the friendly fonts, but the engine room, that's uh totally off limits.
+Speaker 2: Well, not today. I decided I wanted to pull back the curtain. So, I got my hands on something that usually never leaves the engineering team server.
+Speaker 1: Oh. It is a technical document called a software requirement specification or an SRS for a banking management system.
+Speaker 2: Ah, the SRS. Now, I know specification document sounds like the cure for insomnia, but hear me out. This thing is fascinating. It's like finding the blueprints for a bank vault.
+Speaker 1: You know, in my world, we don't look at the SRS as just paperwork. It's the Bible.
+Speaker 2: The Bible? Really?
+Speaker 1: Yeah. It's the constitution of the software. Before a single line of code is written, this document It defines the laws of physics for that universe.
+Speaker 2: So, it tells you what the system is, what it has to do, and crucially, what it is strictly forbidden from doing.
+Speaker 1: And that's our mission for this deep dive. We aren't just looking at features like checking your balance. We are going to dissect the invisible rules that keep the system fast, accessible, and well, hopefully hackproof because it's not just an app. Looking at this, it's a beast.
+Speaker 2: It really is. I mean, the SRS describes a standalone web application, but it's part of a much larger ecosystem.
+Speaker 1: Well, for sure. It's talking to a back-end relational database. It's shaking hands with external services to send OTPs. It's logging activity. It's a living organism. Let's start with the who.
+Speaker 2: Yeah. Usually when I use an app, I just think about me, the user. But this document, it breaks the world down into three very specific characters. And honestly, it feels a bit like a cast system.
+Speaker 1: It's called RO based access control or RBAC. It's a foundational security concept.
+Speaker 2: RBAC.
+Speaker 1: Yeah. You just Yeah, you can't have a flat hierarchy where everyone has the keys to the kingdom. That is how you get zero day exploits and drained accounts. So at the bottom or I guess the most restricted level is the customer. That's you and me, right? And reading the spec, the customer role is defined more by what you can't do than what you can.
+Speaker 2: You can view your balances, savings, current loans. You can initiate transfers, but you are walled off.
+Speaker 1: Walled off how?
+Speaker 2: You can't see other users. You can't change system parameters. And you certainly can't approve your own requests. Which brings us to the second character, the employee, the digital bank teller.
+Speaker 1: Exactly. But think about the power dynamic here. In a physical bank, the teller is just behind a counter.
+Speaker 2: Sure.
+Speaker 1: In this software architecture, the employee is the approver. If you apply for a loan or if there's a flag transaction, the software doesn't just resolve it, it cues it for the employee.
+Speaker 2: Then there's the third role, which uh honestly sounds a bit terrifying. The admin, the architect The admin holds the god mode keys.
+Speaker 1: God mode. Yeah. They handle system configuration. They create the employee accounts and they can see the systemwide reports.
+Speaker 2: That sounds like a massive security risk. If I'm a hacker, I don't care about the customer. I'm hunting the admin.
+Speaker 1: Which is why as we get deeper into this, you'll see the security constraints on the admin are suffocatingly tight.
+Speaker 2: Okay. But the key takeaway from these roles is separation of duties. It's a check and balance system. So the person who requests the money, the customer can not be the person who approves the movement, the employee. And neither of them can be the person who deletes the logs of the transaction, who would be the admin.
+Speaker 1: It prevents the whole rogue operator scenario.
+Speaker 2: Precisely. If one person could do all three, you wouldn't have a bank. You'd have an embezzlement machine.
+Speaker 1: Okay, so the roles are set. Now, let's talk about getting in. The onboarding process in this document is aggressive. It's not sign up with Google.
+Speaker 2: No, it explicitly demands a pan, mobile number, email, and and address proofs.
+Speaker 1: And for our international listeners, a PAN is a permanent account number. It's the Indian equivalent of a social security number or a national tax ID. So the system is designed to strip away anonymity completely.
+Speaker 2: It's basically saying we need to know exactly who you are so the government can find you if you move money weirdly.
+Speaker 1: That's know your customer KYC compliance baked right into the code.
+Speaker 2: Mhm. But the real friction, and I know you hate this, is the login. The requirement is password plus OTP verification.
+Speaker 1: Uh, I do hate it. It's so annoying. Why can't I just use a really long complex password? Why does the system need to text me every single time I want to see my balance?
+Speaker 2: Because users are terrible at security. I mean, people reuse passwords. They write them on sticky notes. They use password 1 2 3. By forcing that OTP, the onetime password, the system is enforcing two things. Okay? Something you know, which is the password, plus something you have, which is your phone. Even if I buy your password on the dark web, I can't log in unless I physically steal your phone too.
+Speaker 1: So, it's protecting me from my own laziness effectively.
+Speaker 2: Yes.
+Speaker 1: Fine. I'll accept the login OTP. But then we get to the transaction part and it happens again. The document covers a bunch of transfer types. NFTT, RTGS, MPS, right? Those are just different pipes for moving money. Think of RTGS like a convoy of armored trucks for huge amounts of money.
+Speaker 2: High value settles individually, right?
+Speaker 1: And IMPS is like a bike messenger instant 247 for smaller amounts.
+Speaker 2: Okay, but here's the kicker. I log in with an OTP. I select transfer. I type in the amount. And then the system demands another OTP to confirm the transaction. Isn't that overkill? I'm already logged in.
+Speaker 1: It's called a safety catch or step up authentication.
+Speaker 2: Mhm.
+Speaker 1: Think about the scenario. You log in at a coffee shop, then you get up to grab a napkin.
+Speaker 2: My laptop is open.
+Speaker 1: Your laptop is open. Without that second OTP, the person at the next table could drain your account in 10 seconds.
+Speaker 2: Ah, that second OTP is the system saying, "I I know you logged in 5 minutes ago, but are you still the one pressing the button right now?
+Speaker 1: That makes sense. It's annoying, but I get it. Now, let's look at the loan workflow. This part surprised me.
+Speaker 2: Oh, yeah. We hear so much about AI and algorithms deciding our creditworthiness, but this spec is old school. It says, "Customers apply via web. Bank employees shall review and approve or reject."
+Speaker 1: It creates a bottleneck, doesn't it? A huge bottleneck. Why not just automate it?
+Speaker 2: Well, liability and nuance. Algorithms are great, but the can be biased or they can be tricked. Right? In this specific system, they want a human in the loop. The software organizes the data, income, proof, credit score, requested amount, but a human have to make the judgment call.
+Speaker 1: So, it slows things down.
+Speaker 2: It does, but it prevents an algorithm from accidentally approving a million dollars in bad loans because of some glitch.
+Speaker 1: Let's talk about the systems memory. I found a requirement that says maintain transaction history for the past 12 months. Ah, the ret attention policy, but only 12 months. That seems really short. I mean, storage is cheap. Why not keep 5 years of history instantly available?
+Speaker 2: Storage is cheap, but searching is expensive.
+Speaker 1: What do you mean?
+Speaker 2: Imagine you have a filing cabinet with this year's files. You can find a document in seconds. Now, imagine a warehouse filled with 10 years of files. Finding one piece of paper takes 10 times longer. So, it's a performance trade-off, 100%. If the database is bloated with transactions from 2018. Every time you try to load your app, it has to sift through all that junk and it gets slow, very slow.
+Speaker 1: By capping the live data at 12 months, they keep the database lean and fast. But what if I need that data for taxes or something?
+Speaker 2: That's where the data portability requirement comes in. The system forces you to download PDF or Excel statements. It's basically the bank saying, "We'll keep the recent stuff hot and ready, but the old stuff is your problem to store."
+Speaker 1: That transitions perfectly into the next section, the nonfunctional requirements or NFRs, which is a terrible name, by the way. It sounds like things that don't work.
+Speaker 2: I know. It's total engineer speed. Functional is what the car does. It drives. Non-functional is how it drives fast, safely, efficiently.
+Speaker 1: Exactly. NFRs are the quality standards. So, let's look at the speed standard. The document requires the system to handle 500 concurrent users.
+Speaker 2: That's a standard load testing metric.
+Speaker 1: But wait, 500? That sounds tiny. If this is a bank with, say, a 100,000 customer, customers, won't 500 users crash the system immediately?
+Speaker 2: This is a really common misconception. Okay, concurrent in software terms doesn't mean people holding the app open. It means people hitting the enter key at the exact same millisecond.
+Speaker 1: Oh, think about it. You spend two minutes just staring at your balance. You aren't stressing the server. You only stress the server for the, you know, 0.1 seconds it takes to fetch that balance. So 500 truly concurrent requests per second actually supports a user base of tens of thousands of people logging in throughout the day.
+Speaker 2: Okay, that makes me feel a lot better. I thought we were building a bank for small village. Now, connected to that is response time. The rule is 95% of requests must be served within 2 seconds.
+Speaker 1: The patients threshold. There's a lot of psychology behind that 2C number. One Mississippi, two Mississippi. And if it takes longer than that, the human brain assumes the app is broken. What do you do when a page doesn't load?
+Speaker 2: I hit ref. refresh again and again and again.
+Speaker 1: Exactly. And hitting refresh sends new requests which adds more load to the already struggling server causing death spiral.
+Speaker 2: Wow. That 2C rule isn't just about convenience. It's about preventing a userinduced DOS attack on your own system.
+Speaker 1: To handle that load, the document mandates a micros service architecture. Now, we hear this buzzword a lot. I usually just picture it as more servers.
+Speaker 2: It's a bit more nuanced than that. Think of a ship. Old systems monoliths are like a canoe.
+Speaker 1: Okay. If you punch a hole anywhere in the canoe, the whole thing sinks, right? The whole system goes down. But microservices are like a battleship with watertight compartments. You have a login compartment, a transfer compartment, a statement compartment. So if one part breaks, if the statement service crashes because too many people are downloading PDFs, the transfer service keeps running. The ship doesn't sync.
+Speaker 2: Okay. So you might not be able to see your history, but you can still pay your rep.
+Speaker 1: Exactly. It's about fault isolation. It keeps a bad day from becoming a catastrophic day. One Last NFR before we get to the scary stuff. Accessibility. The system must follow WC Shikg 2.1 standards.
+Speaker 2: This is vital. It means the code has to work with screen readers for the blind. It needs high contrast for the visually impaired and must be keyboard navigable for those with motor issues. Right? It's acknowledging that access to banking isn't a luxury. It's a right. And legally, if you build a bank branch that a wheelchair can't enter, you get sued. The digital branch has to be just as accessible.
+Speaker 1: All right. Right, deep breath. Let's enter the vault. We are moving to the security and compliance section.
+Speaker 2: This is where the rubber meets the road.
+Speaker 1: First up, encryption. The spec requires HTTPS with TLS 1.3. I know that gives me the little padlock icon in the browser, but what is it actually doing?
+Speaker 2: Imagine you are sending a letter to the bank containing your password. If you use standard HTTP, it's like sending that letter in a clear glass envelope. Anyone can read it. The mailman The person at the sorting office, the guy sitting at the next table in the coffee shop sniffing the Wi-Fi, they can all read the letter.
+Speaker 1: That is terrifying.
+Speaker 2: TLS 1.3 is like putting that letter inside a lead box, wielding it shut, and using a key that only the bank possesses. So, even if someone intercepts it, even if a hacker intercepts the box, the data packet, they can't see what's inside. And TLS 1.3 specifically is the newest, toughest version of that lead box. It cuts out older, weaker locks that hackers have learned to pick.
+Speaker 1: Okay, so the tunnel is safe. But what about when the data gets there? I'm always paranoid that my password is just sitting on a text file on a server somewhere.
+Speaker 2: That's the ultimate sin in cyber security. This SRS explicitly forbids it. It mandates hashing using brypt.
+Speaker 1: Explain hashing for us.
+Speaker 2: Think of a blender. You throw your password blueberry muffin into the blender. The algorithm grinds it up into a string of random garbage characters. Like x79 tag B2 at Grabberers.
+Speaker 1: Exactly. That's the hash. The bank only stores the hash. So if a hacker steals the database, they just get a list of garbage. They can't unblend the smoothie to get the muffin back.
+Speaker 2: But here is the specific detail that caught my eye. The document sets the work factor or cost factor to 12. What does that mean?
+Speaker 1: This is brilliant. BCrypt is designed to be slow.
+Speaker 2: Wait, slow? Don't we want computers to be fast?
+Speaker 1: Not when you're checking passwords.
+Speaker 2: Why not?
+Speaker 1: If a hacker steals those hashes, they will try to guess your password by running millions of words through the blender to see if they match. A cost factor. 12 means the blender runs in slow motion. It forces the computer to do a massive amount of math to check just one password.
+Speaker 2: So it weaponizes slowness.
+Speaker 1: Exactly. It turns a hack that might take 10 minutes into one that takes 10 centuries. It makes the attack too expensive to be worth it.
+Speaker 2: That is incredibly reassuring. But what if the threat isn't a super hacker? What if it's just someone trying to guess my password?
+Speaker 1: That's where the defensive measures kick in. The lockout policy. Five failed attempts. account locked. It stops brute force attacks. If someone's trying 12:34, then 12:35, then 12:36, the system just cuts them off at the knees.
+Speaker 2: And then there's the session timeout. 10 minutes of inactivity, and you get booted. We've all been annoyed by this. You look away to answer a text, you look back, and you have to log in again, right? But the system works on the assumption that an unattended screen is a compromised screen. It protects you from the roommate or the co-orker walking past your desk.
+Speaker 1: Finally, the document wraps up with compliance, GDPR, and RB. I guidelines. This connects the code to the real world. RBI, the Reserve Bank of India, sets the rules on how money moves. GDPR safeguards privacy.
+Speaker 2: So, the developers are admitting they aren't just writing code. They're upholding the law. Non-compliance doesn't just mean a bug report. It means huge fines and jail time.
+Speaker 1: So, we've unpacked this entire ecosystem. We've seen the roles, the pipes moving the money, the microservices keeping the ship afloat, and all the encryption locking it down. really highlights the complexity hidden behind that one transfer button.
+Speaker 2: It does. But I have a provocative thought to leave you with.
+Speaker 1: Okay.
+Speaker 2: We just spent all this time praising how secure this document is. TLS 1.3 brypt cost factor 12 rigid separation of duties. Technologically, this thing is a fortress. The walls are very high. But the document also mentions us, the users. It relies on us not to write our password on a post-it note. It relies on us not to read that OTP out loud to a scammer calling on the phone.
+Speaker 1: You've hit on the security paradox. Right? If the software is this perfect, doesn't that mean the only vulnerability left is me?
+Speaker 2: That is the hard truth. You can engineer the perfect banking system, but you cannot patch the human being.
+Speaker 1: Wow.
+Speaker 2: Social engineering tricking you into opening the door is now easier than breaking down the door.
+Speaker 1: That is a terrifying thought. The weak link is looking at me in the mirror.
+Speaker 2: It's scary, but it's also empowering. The system does the heavy lifting, but you have to hold up your end of the bargain. So, the next time that little spinning wheel takes few seconds to load or the app demands a second OTP, don't get mad. Just remember the invisible war it's fighting to keep your money safe.
+Speaker 1: Mhm. And for the love of everything, keep your OTP to yourself always.
+Speaker 2: Thanks for diving in with us. We'll see you in the next one.
